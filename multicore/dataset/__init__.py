@@ -31,7 +31,9 @@ from multicore.dataset.sl import (
 from multicore.dataset.sl_multi_coil import (
     SheppLoganMultiCoilDataset
 )
-
+from multicore.dataset.matlab import (
+    MatLabDataset
+)
 
 __all__ = [
     'MRIDataset',
@@ -49,5 +51,6 @@ __all__ = [
     'Atlas128DatasetPowerRule',
     'SheppLoganDataset',
     'SheppLoganDatasetPowerRule'
-    'SheppLoganMultiCoilDataset'
+    'SheppLoganMultiCoilDataset',
+    'MatLabDataset'
 ]

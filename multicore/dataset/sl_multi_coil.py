@@ -39,9 +39,9 @@ class SheppLoganMultiCoilDataset(MRIDataset):
         mask2 = mask.copy()
         mask3 = mask.copy()
 
-        mask1[0::3, :] = True
-        mask2[1::3, :] = True
-        mask3[2::3, :] = True
+        mask1[0::5, :] = True
+        mask2[1::5, :] = True
+        mask3[2::5, :] = True
         mask1 = ifftshift(mask1)
         mask2 = ifftshift(mask2)
         mask3 = ifftshift(mask3)

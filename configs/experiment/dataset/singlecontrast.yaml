@@ -1,0 +1,17 @@
+# @package _group_
+_target_: multicore.dataset.MatLabDataset
+img_file: ${hydra:runtime.cwd}/data/IMG_combo.mat
+img_key: IMG_combo
+ksampler: 
+  _target_: multicore.ksampler.UniformSampler
+  n_kspace: 1
+  dim_x: 256
+  dim_y: 256
+  factor_x: 1
+  factor_y: 4
+  stagger: True
+data_file: ${hydra:runtime.cwd}/data/IMG.mat
+data_key: IMG
+coil_file: ${hydra:runtime.cwd}/data/receive.mat
+coil_key: receive
+filter_idx: [2]

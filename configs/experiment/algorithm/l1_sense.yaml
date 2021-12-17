@@ -1,0 +1,4 @@
+# @package _group_
+_target_: multicore.algorithm.L1SENSE
+lamda: 1e-7
+wave_name: db2

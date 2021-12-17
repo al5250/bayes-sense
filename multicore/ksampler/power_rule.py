@@ -148,10 +148,10 @@ class PowerRuleSampler(KSampler):
         out_mask = ifftshift(out_mask)
         return out_mask
 
-    def __call__(self, kspaces_full: List[ndarray]) -> List[ndarray]:
+    def __call__(self, kspaces_full: List[ndarray]) -> ndarray:
         if len(kspaces_full) != self.n_kspace:
             raise ValueError(
                 f'KSampler expects {self.n_kspace} items, but only '
                 f'{len(kspaces_full)} were provided.'
             )
-        return [m * k for k, m in zip(kspaces_full, self._masks)]
+        return np.array([m * k for k, m in zip(kspaces_full, self._masks)])

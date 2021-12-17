@@ -6,15 +6,18 @@ num_em_iters: 8
 max_cg_iters: 700
 log_imgs_interval: 1
 log_final_variances: False
-alpha0: 2e8
-alpha_init: 2e5
+alpha0: 1e11
+alpha_init: 1e8
 cg_tol: 1e-7
 sparse_proj:
   _target_: multicore.projections.Wavelet2D
   num_levels: 3
-  wave: db1
+  wave: db2
   mode: periodization
+  pad_sizes: [32, 46]
 # sparse_proj:
 #   _target_: multicore.projections.Identity
 precision: double
 real_input: False
+keep_observed_kspace: False
+alpha_size: [256, 256]

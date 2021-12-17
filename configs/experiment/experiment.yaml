@@ -3,3 +3,4 @@ defaults:
   - algorithm: zero_fill
   - metric: rmse
   - logger: tensorboard
+dump_file: ~

@@ -1,0 +1,36 @@
+dataset:
+  _target_: multicore.dataset.MatLabDataset
+  img_file: ${hydra:runtime.cwd}/data/IMG_combo.mat
+  img_key: IMG_combo
+  ksampler:
+    _target_: multicore.ksampler.UniformSampler
+    n_kspace: 4
+    dim_x: 256
+    dim_y: 256
+    factor: 2
+    stagger: true
+  data_file: ${hydra:runtime.cwd}/data/IMG.mat
+  data_key: IMG
+  coil_file: ${hydra:runtime.cwd}/data/receive.mat
+  coil_key: receive
+algorithm:
+  _target_: multicore.algorithm.MultiSENSE
+  log_rmses: true
+  num_probes: 5
+  num_em_iters: 40
+  max_cg_iters: 500
+  log_imgs_interval: 1
+  log_final_variances: false
+  alpha0: 1000000.0
+  alpha_init: 1
+  cg_tol: 1.0e-07
+  sparse_proj:
+    _target_: multicore.projections.Wavelet2D
+    num_levels: 4
+    wave: db2
+    mode: periodization
+metric:
+  _target_: multicore.metric.RootMeanSquareError
+  percentage: true
+logger:
+  _target_: multicore.logger.TensorboardLogger

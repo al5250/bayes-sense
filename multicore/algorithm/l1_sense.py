@@ -29,7 +29,7 @@ from multicore.utils import conj_grad, get_torch_device, get_torch_dtypes
 from multicore.metric import RootMeanSquareError
 
 
-class SENSE(ReconstructionAlgorithm):
+class L1SENSE(ReconstructionAlgorithm):
 
     def __init__(self, **kwargs) -> None:
         self.kwargs = kwargs
@@ -46,7 +46,7 @@ class SENSE(ReconstructionAlgorithm):
         recons = []
         for idx in range(len(dataset.imgs)):
             kspace = np.fft.fftshift(shift1 * (shift2 * kspaces[idx]), axes=(-2, -1))
-            recon = mr.app.SenseRecon(kspace, sens, **self.kwargs).run()
+            recon = mr.app.L1WaveletRecon(kspace, sens, **self.kwargs).run()
             recons.append(recon)
         recons = np.array(recons)
     

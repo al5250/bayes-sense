@@ -72,7 +72,9 @@ def conj_grad(
         r = r - alpha * Ap
 
         eps = (torch.norm(r) / torch.norm(b)) ** 2
-        # print(eps)
+        # val = torch.mean(torch.sum(x * A(x), dim=dim, keepdim=True) - 2 * torch.sum(b * x, dim=dim, keepdim=True))
+        # val = torch.mean(torch.sum(x * (r - b), dim=dim, keepdim=True))
+        print(t, eps)
         if eps < tol:
             return x, t
 

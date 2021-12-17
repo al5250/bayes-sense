@@ -1,0 +1,15 @@
+# @package _group_
+_target_: multicore.dataset.MatLabDataset
+img_file: ${hydra:runtime.cwd}/data/ATLAS_128x128.mat
+img_key: img
+ksampler: 
+  _target_: multicore.ksampler.UniformSampler
+  n_kspace: 3
+  dim_x: 128
+  dim_y: 128
+  factor: 3
+  stagger: True
+data_file: ~
+data_key: ~
+coil_file: ${hydra:runtime.cwd}/data/sim_8ch_data.mat
+coil_key: b1

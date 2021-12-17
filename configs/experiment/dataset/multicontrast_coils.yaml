@@ -1,0 +1,45 @@
+# @package _group_
+_target_: multicore.dataset.MatLabDataset
+img_file: ${hydra:runtime.cwd}/data/IMG_combo.mat
+img_key: IMG_combo
+ksampler: 
+  # _target_: multicore.ksampler.RandomUniformSampler
+  # n_kspace: 3 
+  # dim_x: 256
+  # dim_y: 256
+  # accel: 5
+  # calib: 8
+  # _target_: multicore.ksampler.PoissonSampler
+  # n_kspace: 3
+  # img_shape: [1, 256]
+  # accel: 5
+  # crop_corner: False
+  # seed: [1111, 2222, 3333, 4444]
+  # tol: 0.3
+  # calib: [0, 64]
+  _target_: multicore.ksampler.UniformSampler
+  n_kspace: 3
+  dim_x: 256
+  dim_y: 256
+  factor_x: 1
+  factor_y: 5
+  stagger: True
+  # _target_: multicore.ksampler.PowerRuleSampler
+  # n_kspace: 3
+  # dim_x: 256
+  # dim_y: 256
+  # samp_type: 'y'
+  # power: 5
+  # samp_factor: 0.2
+  # norm_type: l2
+  # keep_radius: 0.0
+  # single_mask: False
+  # n_iter: 2
+  # samp_tol: 5
+  # symmetric: False
+  # seed: 1234
+data_file: ${hydra:runtime.cwd}/data/IMG.mat
+data_key: IMG
+coil_file: ${hydra:runtime.cwd}/data/receive.mat
+coil_key: receive
+filter_idx: [0, 2, 3]

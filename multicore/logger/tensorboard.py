@@ -25,19 +25,29 @@ class TensorboardLogger(Logger):
         tag: str,
         imgs: List[ndarray],
         step: Optional[int] = None,
-        scale_individually: bool = False
+        scale_individually: bool = False,
+        scale: bool = True
     ) -> None:
         if np.iscomplexobj(imgs):
-            imgs_real = self._scale(np.real(imgs), scale_individually)
-            imgs_imag = self._scale(np.imag(imgs), scale_individually)
+            # Separate real / imag
+            # imgs_real = self._scale(np.real(imgs), scale_individually)
+            # imgs_imag = self._scale(np.imag(imgs), scale_individually)
+            # self.writer.add_images(
+            #     tag + '/real', np.expand_dims(imgs_real, 1), step, dataformats='NCHW'
+            # )
+            # self.writer.add_images(
+            #     tag + '/imag', np.expand_dims(imgs_imag, 1), step, dataformats='NCHW'
+            # )
+
+            # Take absolute value
+            if scale:
+                imgs = self._scale(np.abs(np.array(imgs)), scale_individually)
             self.writer.add_images(
-                tag + '/real', np.expand_dims(imgs_real, 1), step, dataformats='NCHW'
-            )
-            self.writer.add_images(
-                tag + '/imag', np.expand_dims(imgs_imag, 1), step, dataformats='NCHW'
+                tag, np.expand_dims(imgs, 1), step, dataformats='NCHW'
             )
         else:
-            imgs = self._scale(np.array(imgs), scale_individually)
+            if scale:
+                imgs = self._scale(np.array(imgs), scale_individually)
             self.writer.add_images(
                 tag, np.expand_dims(imgs, 1), step, dataformats='NCHW'
             )
@@ -53,6 +63,8 @@ class TensorboardLogger(Logger):
         #     min_val = imgs.min()
         return (imgs - min_val) / (max_val - min_val)
 
+    def log_hparams(self, **kwargs):
+        self.writer.add_hparams(**kwargs)
 
     def close(self):
         self.writer.close()

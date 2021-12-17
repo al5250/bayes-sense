@@ -10,6 +10,7 @@ from multicore.algorithm.generalized_bcs import GeneralizedBCS
 from multicore.algorithm.multicoil_bcs import MulticoilBCS
 from multicore.algorithm.sense import SENSE
 from multicore.algorithm.multisense import MultiSENSE
+from multicore.algorithm.l1_sense import L1SENSE
 
 
 __all__ = [
@@ -22,5 +23,6 @@ __all__ = [
     'GeneralizedBCS',
     'MulticoilBCS',
     'SENSE'
-    'MultiSENSE'
+    'MultiSENSE',
+    'L1SENSE'
 ]

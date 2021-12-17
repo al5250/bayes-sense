@@ -1,0 +1,23 @@
+# @package _group_
+_target_: multicore.dataset.MatLabDataset
+img_file: ${hydra:runtime.cwd}/data/img_combine_32.mat
+img_key: img_combine
+ksampler: 
+  # _target_: multicore.ksampler.UniformSampler
+  # n_kspace: 4
+  # dim_x: 256
+  # dim_y: 256
+  # factor_x: 3
+  # factor_y: 1
+  # stagger: True
+  _target_: multicore.ksampler.PoissonSampler
+  n_kspace: 4
+  img_shape: [224, 210]
+  accel: 4
+  crop_corner: False
+  seed: [1111, 2222, 3333, 4444]
+data_file: ${hydra:runtime.cwd}/data/img_slice_32.mat
+data_key: img_slice
+coil_file: ${hydra:runtime.cwd}/data/receive_32.mat
+coil_key: receive
+max_contrasts: 4
